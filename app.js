@@ -5,6 +5,7 @@
 const express = require("express");
 const cors = require("cors");
 const morgan = require("morgan");
+const path = require("path"); // Import path module to handle file paths
 
 const { NotFoundError } = require("./expressError");
 const { authenticateJWT } = require("./middleware/auth");
@@ -40,6 +41,14 @@ app.use("/users", usersRoutes);
 app.use("/items", itemsRoutes);
 app.use("/rfqs", rfqsRoutes);
 app.use("/quotes", quotesRoutes);
+
+// Serve static files from the 'dist' folder (for production builds)
+app.use(express.static(path.join(__dirname, "dist")));
+
+// Catch-all route to serve index.html for any non-static request (SPA routing)
+app.get("*", (req, res) => {
+	res.sendFile(path.join(__dirname, "dist", "index.html"));
+});
 
 /** Handle 404 errors -- this matches all unmatched routes */
 app.use(function (req, res, next) {
