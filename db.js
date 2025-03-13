@@ -13,7 +13,7 @@ if (process.env.NODE_ENV === "production") {
 	db = new Client({
 		connectionString: getDatabaseUri(),
 		ssl: {
-			rejectUnauthorized: false, // Allows self-signed certificates (e.g., Heroku)
+			rejectUnauthorized: true, // Allows self-signed certificates (e.g., Heroku)
 		},
 	});
 } else {
