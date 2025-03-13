@@ -1,0 +1,64 @@
+{
+	"$schema": "http://json-schema.org/draft-07/schema#",
+	"$id": "http://example.com/schema.json",
+	"type": "object",
+	"properties": {
+		"customers": {
+			"type": "object",
+			"properties": {
+				"id": { "type": "integer" },
+				"name": { "type": "string" },
+				"markup_type": { "type": "string" },
+				"markup": { "type": "integer", "minimum": 1 }
+			},
+			"required": ["id", "name", "markup_type", "markup"],
+			"additionalProperties": false
+		},
+		"users": {
+			"type": "object",
+			"properties": {
+				"id": { "type": "integer" },
+				"email": { "type": "string", "format": "email" },
+				"password": { "type": "string", "minLength": 6 },
+				"first_name": { "type": "string" },
+				"last_name": { "type": "string" },
+				"phone": { "type": "string" },
+				"is_admin": { "type": "boolean", "default": false }
+			},
+			"required": ["id", "email", "password", "first_name", "last_name", "phone"],
+			"additionalProperties": false
+		},
+		"items": {
+			"type": "object",
+			"properties": {
+				"id": { "type": "string", "maxLength": 25 },
+				"description": { "type": "string" },
+				"uom": { "type": "string" },
+				"cost": { "type": "integer", "minimum": 0 },
+				"price": { "type": "integer", "minimum": 0 }
+			},
+			"required": ["id", "description", "uom"],
+			"additionalProperties": false
+		},
+		"rfqs": {
+			"type": "object",
+			"properties": {
+				"id": { "type": "integer" },
+				"customer_id": { "type": "string", "maxLength": 25 },
+				"user_id": { "type": "integer" }
+			},
+			"required": ["id", "customer_id", "user_id"],
+			"additionalProperties": false
+		},
+		"rfq_items": {
+			"type": "object",
+			"properties": {
+				"rfq_id": { "type": "integer" },
+				"item_id": { "type": "string", "maxLength": 25 },
+				"quantity": { "type": "integer", "minimum": 1 }
+			},
+			"required": ["rfq_id", "item_id", "quantity"],
+			"additionalProperties": false
+		}
+	}
+}
